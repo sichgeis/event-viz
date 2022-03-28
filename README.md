@@ -16,20 +16,19 @@ There is no need to utilize the static code analysis script if you just want to 
 ## Seed graph database with dummy data for testing
 
 ### Setup
-1. Check out every project that may be connected to the event bus (eg. Kinesis).
-2. `cd` into the `src` dirctory
-3. Create a virtual python environment with:
+1. `cd` into the `src` dirctory
+2. Create a virtual python environment with:
    * `virtualenv venv`
    * `source venv/bin/activate`
-4. Install project dependencies into you virtual environment:
+3. Install project dependencies into you virtual environment:
    * `pip install -r requirements.txt`
-6. Run `./start-neo4j.sh` in the `src` directory. Make sure that the docker deamon is running.
-7. Connect to `http://localhost:7474/` and login with these credentials to check if dbms is running:
+4. Run `./start-neo4j.sh` in the `src` directory. Make sure that the docker deamon is running.
+5. Connect to `http://localhost:7474/` and login with these credentials to check if dbms is running:
    * **user:** `neo4j`
    * **pass:** `test`
 
 ### Add dummy data
-1. Check the script `polpulate_db_with_dummy_data.py` and change the hard coded lists and dictionaries to your liking.
+1. Check the script `populate_db_with_dummy_data.py` and change the hard coded lists and dictionaries to your liking.
 2. Start the neo4j docker container as described above.
 3. Run `populate_db_with_dummy_data.py`.
 4. Inspect the data with the neo4j browser as described above.

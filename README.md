@@ -13,25 +13,9 @@ This should allow a quick startup of the graph-browser.
 There is no need to utilize the static code analysis script if you just want to inspect the event flow.
 
 
-## Run the graph-browser to inspect event-flow
+## Seed graph database with dummy data for testing
 
-1. Git checkout the project
-2. Run `./start-neo4j.sh` in the `src` directory. Make sure that the docker deamon is running.
-3. Connect to `http://localhost:7474/` and login with these credentials:
-    * **user:** `neo4j`
-    * **pass:** `test`
-4. Run queries like eg:
-    * `match (n) return n`
-    * `match (n) -[:PurchaseReceived]->(m) return n,m`
-    * `match (n {name: 'shop'}) match (m {name: 'peero-consumer'}) return n, m`
-    * `match (n {name: 'offer'})-[r]->(u) where u.name <> 'offer' return n,r,u`
-
-* A double click on the node expands and collapses child relationships.
-* A cheat sheet for the query language `cypher` can be found here: [reference card](https://neo4j.com/docs/cypher-refcard/current/).
-
-## Update graph database with dummy data for testing
-
-#### Setup
+### Setup
 1. Check out every project that may be connected to the event bus (eg. Kinesis).
 2. `cd` into the `src` dirctory
 3. Create a virtual python environment with:
@@ -39,12 +23,24 @@ There is no need to utilize the static code analysis script if you just want to 
    * `source venv/bin/activate`
 4. Install project dependencies into you virtual environment:
    * `pip install -r requirements.txt`
-   
-#### Add dummy data
+6. Run `./start-neo4j.sh` in the `src` directory. Make sure that the docker deamon is running.
+7. Connect to `http://localhost:7474/` and login with these credentials to check if dbms is running:
+   * **user:** `neo4j`
+   * **pass:** `test`
+
+### Add dummy data
 1. Check the script `polpulate_db_with_dummy_data.py` and change the hard coded lists and dictionaries to your liking.
 2. Start the neo4j docker container as described above.
-3. Run `polpulate_db_with_dummy_data.py`.
+3. Run `populate_db_with_dummy_data.py`.
 4. Inspect the data with the neo4j browser as described above.
+5. Run queries like eg:
+   * `match (n) return n`
+   * `match (n) -[:PurchaseReceived]->(m) return n,m`
+   * `match (n {name: 'shop'}) match (m {name: 'customer'}) return n, m`
+   * `match (n {name: 'billing'})-[r]->(u) where u.name <> 'billing' return n,r,u`
+
+* A double click on the node expands and collapses child relationships.
+* A cheat sheet for the query language `cypher` can be found here: [reference card](https://neo4j.com/docs/cypher-refcard/current/).
 
 ## Current state
 

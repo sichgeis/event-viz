@@ -7,10 +7,13 @@ found events, producers, subscribers and their relationship.
 These scripts are very specific to the system landscape that event-viz was originally created for.
 They are published here as a possible starting point for your own adaptions.
 
-The event graph can be visualized and inspected with the bundled browser.
-A database dump of the most recent scan is also checked into this git repository.
-This should allow a quick startup of the graph-browser.
-There is no need to utilize the static code analysis script if you just want to inspect the event flow.
+The event graph can be visualized and inspected with the Neo4j browser.
+This is a retired source-code archive. Historical database stores, authentication files,
+transaction logs, and runtime logs have been removed from Git history.
+Use the existing synthetic-data script below to create a fresh local example graph.
+The retired application has not been rebuilt or tested against current Neo4j releases.
+The `neo4j` / `test` credentials below are public local-demo values only; do not use them
+for a shared or publicly reachable database.
 
 
 ## Seed graph database with dummy data for testing
@@ -51,8 +54,9 @@ eg:
     
     protected void processEvent(SomeOtherEvent event) {
 ```
-The found events are then output to the `events.dat` file for manual inspection. This file is check in the git repo
-for fail safe checks. If you run the crawler and find less events as stated in the events.dat, something might be wrong.
+The found events are then output to the `events.dat` file for local manual inspection.
+The checked-in data files are empty placeholders. Keep generated analysis results and
+database state local: they can disclose details about the codebases being analyzed.
 
 In a second step the code base is searched for any method signatures which includes the found event type.
 If such a method is found, then that class is assumed to be a subscriber.
@@ -88,3 +92,9 @@ This should first remove all nodes and relations from the database.
 Then it performes the static code analysis and populates the database.
 4. Inspect the data with the neo4j browser as described above.
 5. If you like this data, change the host_name to the current ip of your production neo4j graph-db and rerun the `events_as_edges_proto.py` or `analyse_code_and_insert_into_db.py` to update the database
+
+
+## History cleanup
+
+History was rewritten to remove database state and personal commit-email metadata.
+Create a fresh clone rather than merging an older checkout back into this archive.

@@ -1,0 +1,12 @@
+# Local database state, auth files, and logs
+src/neo4j/
+# Generated event analysis outputs
+src/events.dat
+src/consumer-dict.json
+src/producer-dict.json
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.env.*
